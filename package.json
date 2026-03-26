@@ -1,0 +1,24 @@
+{
+  "name": "ir-marketing-agency-agent-os",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node --test tests/contact.test.mjs",
+    "pretest": "rm -rf .next-test-build && tsc -p tsconfig.test.json",
+    "typecheck": "tsc -p tsconfig.test.json"
+  },
+  "dependencies": {
+    "next": "^15.5.14",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.14.1",
+    "@types/react": "19.0.12",
+    "@types/react-dom": "19.0.4",
+    "typescript": "5.8.3"
+  }
+}

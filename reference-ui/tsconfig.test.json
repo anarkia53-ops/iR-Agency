@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "outDir": ".next-test-build",
+    "noEmit": false,
+    "declaration": false,
+    "emitDeclarationOnly": false
+  },
+  "include": ["lib/contact.ts"]
+}
