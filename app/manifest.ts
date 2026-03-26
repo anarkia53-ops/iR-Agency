@@ -2,13 +2,12 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'IR Agency',
-    short_name: 'IR Agency',
-    description: 'Executive digital growth partner for connected brand, growth, and technology services.',
+    name: 'iR Agency',
+    short_name: 'iR Agency',
+    description: 'Executive Digital Growth Partner',
     start_url: '/',
     display: 'standalone',
     background_color: '#07111f',
-    theme_color: '#070f1d',
-    icons: [],
+    theme_color: '#0A1128',
   };
 }

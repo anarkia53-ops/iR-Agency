@@ -2,27 +2,24 @@ import type { Metadata } from 'next';
 import { Container, SectionTitle } from '@/components/site';
 
 export const metadata: Metadata = {
-  title: 'Case Studies',
-  description:
-    'Case studies are not currently published. New proof-backed case studies will be released after client approval.',
-  alternates: { canonical: '/case-studies' },
+  title: 'Case Studies Status',
+  description: 'Approval-gated proof layer placeholder pending approved client stories.',
   robots: { index: false, follow: false },
+  alternates: { canonical: '/case-studies' },
 };
 
 export default function CaseStudiesPage() {
   return (
     <section className="section">
       <Container>
-        <SectionTitle
-          eyebrow="Case Studies"
-          title="Client case studies are temporarily offline."
-          text="We only publish case studies with explicit client approval and verifiable outcomes."
-        />
-        <article className="card">
-          <h2>Current status</h2>
-          <p>
-            This section is intentionally hidden from search indexing until approved stories are ready for publication.
-          </p>
+        <SectionTitle eyebrow="Proof layer status" title="Case studies remain intentionally unpublished until approved stories exist" text="This protects credibility, respects approval workflow, and avoids publishing placeholder proof that does not meet the quality standard." />
+        <article className="panel highlight">
+          <h2>Current state</h2>
+          <ul className="plainList">
+            <li>No approved public case-study content is bundled in this runtime.</li>
+            <li>The case-studies index is intentionally noindex.</li>
+            <li>Dynamic detail routes remain blocked until real proof is ready.</li>
+          </ul>
         </article>
       </Container>
     </section>

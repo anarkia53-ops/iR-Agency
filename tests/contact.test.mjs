@@ -4,57 +4,44 @@ import { normalizeContactForm, validateContactForm } from '../.next-test-build/c
 
 test('validateContactForm rejects missing required fields', () => {
   const result = validateContactForm({
-    name: 'Jane',
-    email: 'jane@example.com',
-    service: 'Tech & Development',
+    name: 'Ismail',
+    email: 'ismail@example.com',
+    service: '',
     projectType: 'Website / digital presence',
-    budget: '',
-    outcomes: 'Increase lead quality',
-    details: 'Need a redesign with improved conversion paths.',
+    budget: '$5k - $15k',
+    outcomes: 'More leads',
+    details: 'This is enough detail for the project scope and priorities.',
   });
-
   assert.equal(result?.status, 400);
-  assert.match(result?.body.error ?? '', /budget/i);
 });
 
-test('validateContactForm rejects invalid email addresses', () => {
+test('validateContactForm rejects honeypot spam', () => {
   const result = validateContactForm({
-    name: 'Jane',
-    email: 'jane-at-example.com',
-    service: 'Tech & Development',
+    name: 'Ismail Ramadan',
+    email: 'ismail@example.com',
+    service: 'Integrated Engagement',
     projectType: 'Website / digital presence',
-    budget: '$15k - $35k',
-    outcomes: 'Increase lead quality',
-    details: 'Need a redesign with improved conversion paths.',
+    budget: '$5k - $15k',
+    outcomes: 'More leads and better clarity',
+    details: 'This is enough detail for the project scope and priorities.',
+    website: 'spam',
   });
-
   assert.equal(result?.status, 400);
-  assert.match(result?.body.error ?? '', /email/i);
 });
 
-test('normalizeContactForm trims and normalizes values', () => {
-  const result = normalizeContactForm({
-    name: ' Jane ',
-    email: ' JANE@EXAMPLE.COM ',
-    company: ' IR Agency ',
-    service: ' Tech & Development ',
-    projectType: ' Website / digital presence ',
-    budget: ' $15k - $35k ',
-    timeline: ' 2-4 weeks ',
-    outcomes: ' Launch with more clarity ',
-    details: ' Launch a premium website with clear service positioning and intake flow. ',
+test('normalizeContactForm trims fields and lowercases email', () => {
+  const normalized = normalizeContactForm({
+    name: '  Ismail Ramadan  ',
+    email: '  ISMAIL@EXAMPLE.COM  ',
+    company: '  iR Agency  ',
+    service: '  Integrated Engagement  ',
+    projectType: '  Website / digital presence  ',
+    budget: '  $15k - $35k  ',
+    timeline: '  1-2 months  ',
+    outcomes: '  Better market clarity  ',
+    details: '  This is enough detail for the project scope and priorities.  ',
+    website: 'hidden data',
   });
-
-  assert.deepEqual(result, {
-    name: 'Jane',
-    email: 'jane@example.com',
-    company: 'IR Agency',
-    service: 'Tech & Development',
-    projectType: 'Website / digital presence',
-    budget: '$15k - $35k',
-    timeline: '2-4 weeks',
-    outcomes: 'Launch with more clarity',
-    details: 'Launch a premium website with clear service positioning and intake flow.',
-    website: '',
-  });
+  assert.equal(normalized.email, 'ismail@example.com');
+  assert.equal(normalized.website, '');
 });

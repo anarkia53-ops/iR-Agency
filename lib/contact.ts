@@ -31,18 +31,12 @@ export function validateContactForm(input: Partial<ContactFormData>): ContactSub
   for (const field of requiredFields) {
     const value = input[field];
     if (typeof value !== 'string' || value.trim().length === 0) {
-      return {
-        status: 400,
-        body: { error: `Please provide a valid ${field}.` },
-      };
+      return { status: 400, body: { error: `Please provide a valid ${field}.` } };
     }
   }
 
   if (!emailRegex.test(input.email!.trim())) {
-    return {
-      status: 400,
-      body: { error: 'Please provide a valid email address.' },
-    };
+    return { status: 400, body: { error: 'Please provide a valid email address.' } };
   }
 
   if (!hasMinLength(input.name, 2)) {
@@ -50,17 +44,11 @@ export function validateContactForm(input: Partial<ContactFormData>): ContactSub
   }
 
   if (!hasMinLength(input.outcomes, 8) || !hasMinLength(input.details, 20)) {
-    return {
-      status: 400,
-      body: { error: 'Please include enough detail for outcomes and project scope.' },
-    };
+    return { status: 400, body: { error: 'Please include enough detail for outcomes and project scope.' } };
   }
 
   if (typeof input.website === 'string' && input.website.trim().length > 0) {
-    return {
-      status: 400,
-      body: { error: 'Spam detection triggered. Please resubmit without hidden fields.' },
-    };
+    return { status: 400, body: { error: 'Spam detection triggered. Please resubmit without hidden fields.' } };
   }
 
   return null;

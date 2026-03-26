@@ -1,17 +1,4 @@
-# dependencies
-node_modules/
-
-# next/build outputs
-.next/
-.next-test-build/
-dist/
-build/
-coverage/
-
-# local artifacts
-*.zip
-*.pyc
-__pycache__/
-
-# misc
-*.log
+.next
+.next-test-build
+node_modules
+.env*
