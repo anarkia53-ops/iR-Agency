@@ -132,7 +132,7 @@ export default function Home() {
             title="Engagement structures designed around the stage your business is in."
             text="Whether you need a refined market launch, a stronger growth program, or deeper technical enablement, we package work around clear priorities and accountable execution."
           />
-          <div className="grid three">
+          <div className="grid four">
             {solutionPackages.map((pack) => (
               <article className="card" key={pack.title}>
                 <h3>{pack.title}</h3>
