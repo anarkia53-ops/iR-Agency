@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Container, SectionTitle } from '@/components/site';
-import { serviceClusters } from '@/lib/site-data';
+import { serviceClusters, services } from '@/lib/site-data';
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -21,30 +21,35 @@ export default function ServicesPage() {
         />
 
         <div className="grid three">
-          {serviceClusters.map((cluster) => (
-            <article className="card serviceCard" key={cluster.slug}>
-              <div>
-                <p className="tag">{cluster.name}</p>
-                <h3>{cluster.summary}</h3>
-              </div>
-              <ul className="plainList">
-                {cluster.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <div>
-                <h4>What this supports</h4>
+          {serviceClusters.map((cluster) => {
+            const clusterServices = services.filter((service) => service.cluster === cluster.name);
+
+            return (
+              <article className="card serviceCard" key={cluster.slug}>
+                <div>
+                  <p className="tag">{cluster.name}</p>
+                  <h3>{cluster.summary}</h3>
+                </div>
                 <ul className="plainList">
-                  {cluster.outcomes.map((outcome) => (
-                    <li key={outcome}>{outcome}</li>
+                  {clusterServices.map((service) => (
+                    <li key={service.slug}>
+                      <Link href={`/services/${service.slug}`} className="textLink">
+                        {service.name}
+                      </Link>
+                    </li>
                   ))}
                 </ul>
-              </div>
-              <Link href={`/services/${cluster.slug}-1`} className="textLink">
-                View service details
-              </Link>
-            </article>
-          ))}
+                <div>
+                  <h4>What this supports</h4>
+                  <ul className="plainList">
+                    {cluster.outcomes.map((outcome) => (
+                      <li key={outcome}>{outcome}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         <div className="ctaBanner topGap">
