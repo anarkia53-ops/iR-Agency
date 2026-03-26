@@ -11,12 +11,17 @@ The only implemented and verified routes are:
 - `/services/[slug]`
 - `/contact`
 
+Proof-layer placeholders also exist but are intentionally blocked from publication:
+- `/case-studies` (placeholder and noindex)
+- `/case-studies/[slug]` (returns `notFound()`)
+
 ## Proof Layer (Blocked)
 The proof layer is intentionally blocked from production use:
 - `caseStudies` array is empty
 - `/case-studies` is a placeholder
 - `/case-studies/[slug]` returns `notFound()`
 - `robots.ts` is disallowing `/case-studies`
+- `sitemap.ts` omits all `/case-studies` paths
 
 ## Operational API
 - `/api/contact` is the only verified operational API surface.
