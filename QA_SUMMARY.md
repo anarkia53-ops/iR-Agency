@@ -1,23 +1,28 @@
-# Final QA Summary
+# Current QA and Governance Summary
 
-## Scope reviewed
-- Dead code exposure in the delivered source tree
-- Null/undefined execution gaps in route resolution and intake flow
-- Obvious race-condition risk in the current client logic
-- Final-content readiness and structural overlap
+## Active Runtime
+The active runtime in this repository is the public website only.
 
-## Resolved in final package
-- Removed starter/launch phrasing from the public pages
-- Replaced the non-functional contact placeholder with a working intake form that uses a mailto fallback
-- Added explicit not-found handling for invalid dynamic agent routes
-- Tightened dynamic route null-guard logic on `app/agents/[slug]/page.tsx`
-- Kept all client state local to the form to avoid shared mutable state races
+## Verified Routes
+The only implemented and verified routes are:
+- `/`
+- `/about`
+- `/services`
+- `/services/[slug]`
+- `/contact`
 
-## Review outcome
-- No dead files were kept outside the delivered route/component/data set
-- No shared async mutation flows exist in the current shipped code path
-- No null-path remains on the agent detail route after the explicit not-found guard
-- The contact path now has an executable fallback from first launch without requiring backend services
+## Proof Layer (Blocked)
+The proof layer is intentionally blocked from production use:
+- `caseStudies` array is empty
+- `/case-studies` is a placeholder
+- `/case-studies/[slug]` returns `notFound()`
+- `robots.ts` is disallowing `/case-studies`
 
-## Runtime note
-The package is intentionally dependency-light and does not include external API requirements, which reduces first-run failure risk.
+## Operational API
+- `/api/contact` is the only verified operational API surface.
+
+## Test Scope
+- The current test scope is narrow and centered entirely on the contact flow.
+
+## Structural Governance
+- `reference-ui/` is classified strictly as non-runtime duplicated material.

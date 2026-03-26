@@ -1,56 +1,37 @@
-# IR Agency Website
+# IR Agency - Public Website Runtime
 
-Production-oriented Next.js (App Router) website for IR Agency. This repository includes a public marketing site and a structured contact intake flow.
+This repository contains the active public website runtime for IR Agency.
 
 ## Stack
-- Next.js 15 (App Router)
-- React 19
+- Next.js App Router
+- React
 - TypeScript
 
-## Local development
-```bash
-npm install
-npm run dev
-```
+## Public Routes
+The active public routing surface consists of:
+- `/`
+- `/services`
+- `/services/[slug]`
+- `/about`
+- `/contact`
 
-## Validation commands
-```bash
-npm run typecheck
-npm run test
-npm run build
-```
+## Content Model
+The current content model implemented in the data layer includes:
+- 4-package public model
+- Explicit 18-service detail surface
 
-## Contact intake architecture
-1. Client form posts JSON to `POST /api/contact`.
-2. Server validates + normalizes payload (`lib/contact.ts`).
-3. Optional webhook forwarding to CRM/Zapier (`CRM_WEBHOOK_URL` fallback: `ZAPIER_WEBHOOK_URL`).
-4. Explicit error responses are returned for validation failures, webhook failures, timeout, and rate limiting.
+## Contact Intake Architecture
+The contact intake flow relies on the following architecture:
+- `/api/contact` endpoint
+- Validation and normalization of incoming payloads
+- Webhook forwarding to external systems
 
-## Environment variables
-| Variable | Required | Description |
-| --- | --- | --- |
-| `SITE_URL` | Yes (production) | Canonical public base URL used for metadata, sitemap, and robots host. |
-| `CRM_WEBHOOK_URL` | Recommended | Production CRM/webhook endpoint for validated lead forwarding. |
-| `ZAPIER_WEBHOOK_URL` | Optional fallback | Legacy fallback webhook if `CRM_WEBHOOK_URL` is not set. |
-| `NEXT_PUBLIC_SITE_URL` | Optional fallback | Legacy site URL fallback if `SITE_URL` is not set. |
+## Case Studies Status
+The portfolio and proof layer is currently:
+- Approval-gated / blocked
+- Not current public proof content
 
-## Deployment notes
-- Set `SITE_URL` in both Preview and Production environments.
-- Set `CRM_WEBHOOK_URL` in Production; use a non-live endpoint in Preview.
-- `/case-studies` remains intentionally noindex until approved client stories are available.
-
-## Staging and launch guidance
-- Use a staging environment with a non-production webhook URL.
-- Verify these paths manually before each release: `/`, `/services`, `/about`, `/contact`, `/api/contact`.
-- Confirm that contact submissions appear in the downstream system before promoting to production.
-
-## Operational hardening checklist
-- Enable log forwarding for server runtime errors and warnings.
-- Add uptime checks for `/` and `/contact`.
-- Add alerting for repeated 5xx or 429 responses on `/api/contact`.
-
-## Repository governance recommendations
-If you cannot enforce these in hosting settings yet, apply them as team policy immediately:
-- Require pull request review before merging to main.
-- Require passing CI checks (`npm run typecheck`, `npm run test`, and `npm run build`).
-- Restrict force-pushes on protected branches.
+## Source-of-Truth Boundary
+To maintain code governance and architectural integrity:
+- `app/`, `components/`, `lib/`, `tests/` = active runtime/support structure
+- `reference-ui/` = non-runtime duplicated material pending archive/remove after verification
