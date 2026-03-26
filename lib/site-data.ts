@@ -262,12 +262,6 @@ export const aboutPillars = [
 
 export const caseStudies = [] as const;
 
-export const dashboardStats = [
-  { title: 'Pipeline', items: ['12 active opportunities', '4 awaiting approval', '2 escalation flags'] },
-  { title: 'Delivery', items: ['3 websites in production', '1 QA blocker', '5 items ready to ship'] },
-  { title: 'Reporting', items: ['Weekly summary scheduled', 'Leadership snapshot healthy', 'Client scorecards ready'] },
-] as const;
-
 export const contactChannels = [
   {
     title: 'Start an intake',

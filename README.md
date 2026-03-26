@@ -15,6 +15,10 @@ The active public routing surface consists of:
 - `/about`
 - `/contact`
 
+The runtime also contains proof-layer placeholder routes that remain intentionally non-publishable:
+- `/case-studies` (placeholder page, noindex)
+- `/case-studies/[slug]` (always `notFound()`)
+
 ## Content Model
 The current content model implemented in the data layer includes:
 - 4-package public model
@@ -29,6 +33,7 @@ The contact intake flow relies on the following architecture:
 ## Case Studies Status
 The portfolio and proof layer is currently:
 - Approval-gated / blocked
+- `caseStudies` data is intentionally empty
 - Not current public proof content
 
 ## Source-of-Truth Boundary
